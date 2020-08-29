@@ -12,6 +12,8 @@
 </nav>
 
 <h1 class="text-center">Recipe Index</h1>
+<!--/*@thymesVar id="id" type="templates"*/-->
+<a th:href="@{/recipe/{id}(id=${recipes.id})}" class="btn btn-primary" th:text="${recipes.name}"></a>
 
 </body>
 </html>

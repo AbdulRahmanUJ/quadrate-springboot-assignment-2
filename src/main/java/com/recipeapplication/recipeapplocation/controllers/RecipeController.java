@@ -5,9 +5,7 @@ import com.recipeapplication.recipeapplocation.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
     }
 
     @GetMapping("/addrecipe")
-    public String showSignUpForm(Recipe recipe) {
+    public String showRecipeForm(Recipe recipe) {
         return "add";
     }
 
@@ -34,6 +32,13 @@ import org.springframework.web.bind.annotation.PostMapping;
     @PostMapping("/save")
     public String saveRecipe(@ModelAttribute("recipe") Recipe recipe){
         recipeRepository.save(recipe);
-        return "redirect:index";
+        return "redirect:/";
+    }
+    @GetMapping("recipe/{id}")
+    public String showRecipe(@PathVariable("id") Integer id, Model model) {
+        Recipe recipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid recipe Id:" + id));
+        model.addAttribute("recipe", recipe);
+        return "details";
     }
 }

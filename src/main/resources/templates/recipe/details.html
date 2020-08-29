@@ -5,13 +5,26 @@
     <title>Recipe Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body class="container"><br>
+<body>
 <nav>
     <a href="/">Resipes</a> |
     <a href="/addrecipe">Add New Recipe</a>
 </nav>
+<!--/*@thymesVar id="recipe" type="java"*/-->
+<div th:switch="${recipe}" class="container">
+    
+    <h1 class="text-center">Recipe Details</h1>
+        <div class="form-group col-md-6">
+            <label>Recipe Name</label><br>
+            <h2 th:text="${recipe.name}"></h2>
+        </div>
+    
+        <div class="form-group col-md-8">
+            <label>Recipe Description</label> <br>
+            <p th:text="${recipe.description}"></p>
+        </div>
 
-<h1 class="text-center">Recipe Details</h1>
+</div>
 
 </body>
 </html>
